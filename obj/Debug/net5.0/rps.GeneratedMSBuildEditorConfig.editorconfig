@@ -7,4 +7,4 @@ build_property.PublishSingleFile =
 build_property.IncludeAllContentForSelfExtract = 
 build_property._SupportedPlatformList = Android,iOS,Linux,macOS,Windows
 build_property.RootNamespace = rps
-build_property.ProjectDir = /Users/ibrahim/Documents/Software/rps/
+build_property.ProjectDir = /home/ibrahim/Documents/Software/rps/

@@ -2,7 +2,7 @@ using System;
 
 
 namespace rps {
-    public class DataModel {
+    public class GameData {
 
         public int Id { get; set; }
         public int GameMode { get; set; }

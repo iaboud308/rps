@@ -5,13 +5,13 @@ namespace rps {
 
     class MainApp {
         
-        Services service;
-        OpsLogic opsLogic;
+        Service service;
+        GameLogic gameLogic;
         DbService dbService;
         
         public MainApp() {
-            service = new Services();
-            opsLogic = new OpsLogic();
+            service = new Service();
+            gameLogic = new GameLogic();
             dbService = new DbService();
         }       
 
@@ -28,51 +28,38 @@ namespace rps {
             }
 
             if(PlayerSelection.Equals("2")) {
-                MultiPlayerMode();                
+                MultiPlayerMode();
             }
 
             if(PlayerSelection.Equals("3")) {
                 Console.WriteLine("Bye bye");
             }
+
+            if(PlayerSelection.Equals("4")) {
+                ViewGameLogs();
+            }
         }
 
 
         public void SinglePlayerMode() {
-            Console.Write("Player 1 Enter your name: ");
-            string PlayerOneName = Console.ReadLine();
-            string PlayerTwoName = "Computer";
-            string PlayerOne = service.PlayerChoice();
-            string PlayerTwo = service.ComputerChoice();
-            int WinnerInt = opsLogic.GetWinner(PlayerOne, PlayerTwo);
-            string Winner = opsLogic.DecodeWinner(PlayerOneName, PlayerTwoName, WinnerInt);
-            string PlayerOneSelection = opsLogic.DecodeSelection(PlayerOne);
-            string PlayerTwoSelection = opsLogic.DecodeSelection(PlayerTwo);
-            Console.WriteLine($"{PlayerOneName} chose {PlayerOneSelection} and {PlayerTwoName} chose {PlayerTwoSelection}");
+            Player PlayerOne = service.PlayerChoice();
+            Player PlayerTwo = service.ComputerChoice();
+            string Winner = gameLogic.GetWinner(PlayerOne, PlayerTwo);
+            Console.WriteLine($"{PlayerOne.Name} chose {PlayerOne.SelectionName} and {PlayerTwo.Name} chose {PlayerTwo.SelectionName}");
             Console.WriteLine($"The Winner is: {Winner}");
-            dbService.SaveGame(1, PlayerOneName, PlayerTwoName, PlayerOneSelection, PlayerTwoSelection, Winner);
+            dbService.SaveGame(1, PlayerOne, PlayerTwo, Winner);
             PlayAgainOption();
         }
 
 
 
         public void MultiPlayerMode() {
-            string PlayerOneName;
-            string PlayerTwoName;
-            Console.Write("Player 1 Enter your name: ");
-            PlayerOneName = Console.ReadLine();
-            Console.Write("Player 2 Enter your name: ");
-            PlayerTwoName = Console.ReadLine();
-            Console.Write($"{PlayerOneName}: ");
-            string PlayerOne = service.PlayerChoice();
-            Console.Write($"{PlayerTwoName}: ");
-            string PlayerTwo = service.PlayerChoice();
-            int WinnerInt = opsLogic.GetWinner(PlayerOne, PlayerTwo);
-            string Winner = opsLogic.DecodeWinner(PlayerOneName, PlayerTwoName, WinnerInt);
-            string PlayerOneSelection = opsLogic.DecodeSelection(PlayerOne);
-            string PlayerTwoSelection = opsLogic.DecodeSelection(PlayerTwo);
-            Console.WriteLine($"{PlayerOneName} chose {PlayerOneSelection} and {PlayerTwoName} chose {PlayerTwoSelection}");
+            Player PlayerOne = service.PlayerChoice();
+            Player PlayerTwo = service.PlayerChoice();
+            string Winner = gameLogic.GetWinner(PlayerOne, PlayerTwo);
+            Console.WriteLine($"{PlayerOne.Name} chose {PlayerOne.SelectionName} and {PlayerTwo.Name} chose {PlayerTwo.SelectionName}");
             Console.WriteLine($"The Winner is: {Winner}");
-            dbService.SaveGame(2, PlayerOneName, PlayerTwoName, PlayerOneSelection, PlayerTwoSelection, Winner);
+            dbService.SaveGame(2, PlayerOne, PlayerTwo, Winner);
             PlayAgainOption();
         }
 
@@ -88,6 +75,11 @@ namespace rps {
                 Start();
             }
 
+        }
+
+        public void ViewGameLogs() {
+            Console.WriteLine("Id | P1 Name | P1 Selection | P2 Name | P2 Selection | Winner | Date | Time ");
+            dbService.GetAll();
         }
 
 

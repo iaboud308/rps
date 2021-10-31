@@ -1,26 +1,27 @@
 using System;
 using System.Linq;
+using System.Collections.Generic;
 
 
 namespace rps {
-    class Services {
+
+    class Service {
 
         public string PlayerResponse;
-        public string[] ValidOptionsMainMenu = {"1", "2", "3"};
-        public string[] ValidOptionsPlayerChoice = {"1", "2", "3", "4"};
+        public MenuItem[] ValidOptionsMainMenu = { new MenuItem(1, "Single Player"), new MenuItem(2, "Two Player"), new MenuItem(3, "Quit"), new MenuItem(4, "View Game Logs") } ;
+        public MenuItem[] ValidOptionsPlayerChoice = { new MenuItem(1, "Rock"), new MenuItem(2, "Paper"), new MenuItem(3, "Scissors") };
+        
 
         public string MainMenu() {
 
             bool IsValid = false;
-
             while(!IsValid) {
-
                 Console.WriteLine("Please choose one of the following options: ");
-                Console.WriteLine("1 - Single Player");
-                Console.WriteLine("2 - Two Players");
-                Console.WriteLine("3 - Quit Game");
+                foreach(MenuItem item in ValidOptionsMainMenu) {
+                    Console.WriteLine($"{item.MenuItemNumber} - {item.MenuItemName}");
+                }
                 PlayerResponse = Console.ReadLine();
-                if(ValidOptionsMainMenu.Contains(PlayerResponse)) {
+                if(Array.Exists(ValidOptionsMainMenu, item => item.MenuItemNumber.ToString().Equals(PlayerResponse))) {
                     IsValid = true;
                     break;
                 }
@@ -30,30 +31,32 @@ namespace rps {
         }
 
 
-        public string PlayerChoice() {
+        public Player PlayerChoice() {
             bool IsValid = false;
-
+            Console.Write("Enter player name: ");
+            string PlayerName = Console.ReadLine();
             while(!IsValid) {
-                Console.WriteLine("Please choose one of the following options: ");
-                Console.WriteLine("1 - Rock");
-                Console.WriteLine("2 - Paper");
-                Console.WriteLine("3 - Scissors");
-                Console.WriteLine("4 - Back to main menu");
-                PlayerResponse = Console.ReadLine();
-                if(ValidOptionsPlayerChoice.Contains(PlayerResponse)) {
-                    IsValid = true;
-                    break;
+                Console.WriteLine($"{PlayerName} Please choose one of the following options: ");
+                foreach(MenuItem item in ValidOptionsPlayerChoice) {
+                    Console.WriteLine($"{item.MenuItemNumber} - {item.MenuItemName}");
                 }
-                Console.WriteLine("Please enter a valid response");
+                PlayerResponse = Console.ReadLine();
+                if(Array.Exists(ValidOptionsPlayerChoice, item => item.MenuItemNumber.ToString().Equals(PlayerResponse))) {
+                    IsValid = true;
+                } else {
+                    Console.WriteLine("Please enter a valid response");
+                }
             }
 
-            return PlayerResponse;
+            MenuItem PlayerChoice = Array.Find<MenuItem>(ValidOptionsPlayerChoice, choice => choice.MenuItemNumber.ToString().Equals(PlayerResponse));
+            return  new Player(PlayerName, PlayerChoice.MenuItemNumber, PlayerChoice.MenuItemName);
         }
 
-        public string ComputerChoice() {
+        public Player ComputerChoice() {
             Random random = new Random();
-            string ComputerSelection = random.Next(1, 4).ToString();
-            return ComputerSelection;
+            int ComputerSelection = random.Next(1, 4);
+            MenuItem ComputerChoice = Array.Find<MenuItem>(ValidOptionsPlayerChoice, choice => choice.MenuItemNumber.ToString().Equals(PlayerResponse));
+            return new Player("Computer", ComputerChoice.MenuItemNumber, ComputerChoice.MenuItemName);
         }
     }
 }
