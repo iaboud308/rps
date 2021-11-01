@@ -16,6 +16,7 @@ namespace rps {
         }       
 
         public void Start() {
+
             string PlayerSelection = service.MainMenu();
             HandleMainMenuResponse(PlayerSelection);
             
@@ -45,8 +46,6 @@ namespace rps {
             Player PlayerOne = service.PlayerChoice();
             Player PlayerTwo = service.ComputerChoice();
             string Winner = gameLogic.GetWinner(PlayerOne, PlayerTwo);
-            Console.WriteLine($"{PlayerOne.Name} chose {PlayerOne.SelectionName} and {PlayerTwo.Name} chose {PlayerTwo.SelectionName}");
-            Console.WriteLine($"The Winner is: {Winner}");
             dbService.SaveGame(1, PlayerOne, PlayerTwo, Winner);
             PlayAgainOption();
         }
@@ -57,8 +56,6 @@ namespace rps {
             Player PlayerOne = service.PlayerChoice();
             Player PlayerTwo = service.PlayerChoice();
             string Winner = gameLogic.GetWinner(PlayerOne, PlayerTwo);
-            Console.WriteLine($"{PlayerOne.Name} chose {PlayerOne.SelectionName} and {PlayerTwo.Name} chose {PlayerTwo.SelectionName}");
-            Console.WriteLine($"The Winner is: {Winner}");
             dbService.SaveGame(2, PlayerOne, PlayerTwo, Winner);
             PlayAgainOption();
         }

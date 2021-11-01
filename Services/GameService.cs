@@ -55,7 +55,7 @@ namespace rps {
         public Player ComputerChoice() {
             Random random = new Random();
             int ComputerSelection = random.Next(1, 4);
-            MenuItem ComputerChoice = Array.Find<MenuItem>(ValidOptionsPlayerChoice, choice => choice.MenuItemNumber.ToString().Equals(PlayerResponse));
+            MenuItem ComputerChoice = Array.Find<MenuItem>(ValidOptionsPlayerChoice, choice => choice.MenuItemNumber == ComputerSelection);
             return new Player("Computer", ComputerChoice.MenuItemNumber, ComputerChoice.MenuItemName);
         }
     }

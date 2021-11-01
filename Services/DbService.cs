@@ -18,10 +18,6 @@ namespace rps {
         }
 
 
-        public void Get(int Id) {
-
-        }
-
 
         public void SaveGame(int GameMode, Player PlayerOne, Player PlayerTwo, string Winner) {
 
