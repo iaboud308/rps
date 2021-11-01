@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/Users/ibrahim/Documents/Software/rps/rps.csproj": {}
+    "/home/ibrahim/Documents/Software/rps/rps.csproj": {}
   },
   "projects": {
-    "/Users/ibrahim/Documents/Software/rps/rps.csproj": {
+    "/home/ibrahim/Documents/Software/rps/rps.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/ibrahim/Documents/Software/rps/rps.csproj",
+        "projectUniqueName": "/home/ibrahim/Documents/Software/rps/rps.csproj",
         "projectName": "rps",
-        "projectPath": "/Users/ibrahim/Documents/Software/rps/rps.csproj",
-        "packagesPath": "/Users/ibrahim/.nuget/packages/",
-        "outputPath": "/Users/ibrahim/Documents/Software/rps/obj/",
+        "projectPath": "/home/ibrahim/Documents/Software/rps/rps.csproj",
+        "packagesPath": "/home/ibrahim/.nuget/packages/",
+        "outputPath": "/home/ibrahim/Documents/Software/rps/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/ibrahim/.nuget/NuGet/NuGet.Config"
+          "/home/ibrahim/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
@@ -64,7 +64,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/5.0.402/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/5.0.402/RuntimeIdentifierGraph.json"
         }
       }
     }
